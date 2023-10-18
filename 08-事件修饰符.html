@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件绑定-事件修饰符</title>
+    <style>
+        [v-cloak]{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- 将数据填充到html标签中 -->
+    <!-- 概览 -->
+    <!-- 1.插值表达式  -->
+    <!-- 2.指令 -->
+    <!-- 3.事件绑定（也是指令一种，绑定具体的事件操作） -->
+     <!-- 事件修饰符，官方有10个。 -->
+     <!-- .stop阻止冒泡 用法：v-on:click.stop = 'handle'
+        【调用 event.stopPropagation()。这是原始方法】 
+     -->
+     <!-- .prevent阻止默认行为 用法：v-on:click.prevent = 'handle'
+        【调用 event.preventDefault()这是原始方法】 
+     -->
+
+     <!-- 链式调用修饰符 ,注意先后顺序，从前到后
+          <button @click.stop.prevent="doThis"></button>
+    -->
+
+
+    <!-- 用于填充数据的标签 -->
+    <div id="app">
+        <div v-cloak>{{num}}</div> 
+        <div v-on:click="handle">
+            <button v-on:click.stop="handle1">点击1</button>
+        </div>
+        <div>
+            <a href="http://www.baidu.com" v-on:click.prevent="handle2">百度</a>
+        </div>
+    </div>  
+
+
+    <!-- 引入vue.js库文件 -->
+    <script type="text/javascript" src="../JS/vue.min.js"></script>
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: '#app', 
+            data: {
+                num: 0,
+            },
+            methods:{
+                handle: function(){
+                    this.num++
+                },
+                handle1: function(event){
+                    // 阻止冒泡
+                    // event.stopPropagation()
+                },
+                handle2: function(event){
+                    // 阻止默认行为
+                    // event.preventDefault()
+                }
+            }
+        });
+    </script>
+</body>
+</html>

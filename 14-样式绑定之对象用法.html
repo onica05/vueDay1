@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模板语法--样式绑定</title>
+    <style>
+        .active {
+            color: blueviolet;
+            border:1px solid red;
+            width: 100px;
+            height: 100px;
+        }
+        .error{
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <!-- 将数据填充到html标签中 -->
+    <!-- 概览 -->
+    <!-- 1.插值表达式  -->
+    <!-- 2.指令 -->
+    <!-- 3.事件绑定 -->
+    <!-- 4.属性绑定 -->
+    <!-- 5.样式绑定 -->
+    <!-- 两种方式:类名（class);直接操作标签的style属性 -->
+
+    <!-- 方式一：class样式处理 【也是用到v-bind】-->
+    <!--  两种写法： 
+        <div v-bind:class="{active: isActive}"></div>  对象形式 
+        <div v-bind:class="[activeClass, errorClass]"></div> 数组形式
+     -->
+
+    
+     <!-- 用于填充数据的标签 -->
+     <div id="app">
+        <!-- 多个类名之间逗号分隔 -->
+        <!-- 对象形式 -->
+        <div v-bind:class="{active: isActive,error: isError}">{{msg}}</div>
+        <button v-on:click="handle">切换</button>
+    </div>  
+
+
+    <!-- 引入vue.js库文件 -->
+    <script type="text/javascript" src="../JS/vue.min.js"></script>
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: '#app', 
+            data: {
+                msg: 'hello vue',
+                isActive: true,
+                isError: true,
+            },
+            methods: {
+                handle: function(event){
+                    // 控制isActive 在 true false之间的切换
+                    // this.isActive = false 这样写只会切换一次 不灵活
+                    this.isActive = !this.isActive;
+                    // this.isError = !this.isError;
+
+
+                }
+            }
+        });
+    </script>
+</body>
+</html>

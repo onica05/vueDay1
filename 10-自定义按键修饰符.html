@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件绑定-自定义按键修饰符</title>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <!-- 将数据填充到html标签中 -->
+    <!-- 概览 -->
+    <!-- 1.插值表达式  -->
+    <!-- 2.指令 -->
+    <!-- 3.事件绑定（也是指令一种，绑定具体的事件操作） -->
+     <!-- 自定义按键修饰符， -->
+     <!-- 全局config.keyCodes对象  原理：通过ASCII码，使用keyCode可以获取 -->
+
+
+    <!-- 用于填充数据的标签 -->
+    <div id="app">
+        <input type="text" v-on:keyup.aaa="handle" v-model="info">
+        <!-- 由于是数字形式可能不太好记忆，所以采用这种 -->
+
+    </div>  
+
+
+    <!-- 引入vue.js库文件 -->
+    <script type="text/javascript" src="../JS/vue.min.js"></script>
+    <script type="text/javascript">
+        // 由于是数字形式可能不太好记忆，所以采用这种
+        Vue.config.keyCodes.aaa = 65;
+        var vm = new Vue({
+            el: '#app', 
+            data: {
+              info:''
+            },
+            methods:{
+                handle:function(event){
+                    console.log(event.keyCode);
+                }
+                
+            }
+        });
+    </script>
+</body>
+</html>

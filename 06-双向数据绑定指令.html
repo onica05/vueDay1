@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模板语法--双向数据绑定指令</title>
+    <style type="text/css">
+        [v-cloak] {
+             display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- 将数据填充到html标签中 -->
+    <!-- 概览 -->
+    <!-- 1.插值表达式  -->
+    <!-- 2.指令 -->
+    <!-- 双向数据绑定指令 -->
+    <!-- 理解：数据响应式：数据的变化导致页面 内容 的变化 -->
+    <!-- 1.v-model 只编译一次 在表单输入元素或组件上创建双向绑定。-->
+    <!-- 用法：<input type='text' v-model='uname'/>  v-model等于的值是data对象里面的属性-->
+    
+
+    
+
+
+     <!-- 用于填充数据的标签 -->
+    <div id="app">
+        <div v-cloak>{{msg}}</div> 
+        <div v-text = 'msg'></div> 
+        <div v-html = 'msg1'></div> 
+        <div v-pre >{{msg1}}</div> 
+        <div v-once >{{info}}</div> 
+        <div>
+            <input type="text" v-model='msg'/>
+        </div>
+        <div>
+            <input type="text" v-model='uname'/>
+        </div>
+    </div>  
+
+
+    <!-- 引入vue.js库文件 -->
+    <script type="text/javascript" src="../JS/vue.min.js"></script>
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: '#app', 
+            data: {
+                msg: 'hello vue',
+                msg1:'<h1>HTML</h1>',
+                info:'nihao',
+                uname:'admin'
+            }
+        });
+    </script>
+</body>
+</html>

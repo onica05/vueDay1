@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模板语法--样式绑定</title>
+    <style>
+        .active {
+            border:4px solid yellow;
+            width: 100px;
+            height: 100px;
+        }
+        .error{
+            background-color: green;
+        }
+        .test{
+            color: red;
+
+        }
+        .base{
+            background-color: palegreen;
+        }
+    </style>
+</head>
+<body>
+    <!-- 将数据填充到html标签中 -->
+    <!-- 概览 -->
+    <!-- 1.插值表达式  -->
+    <!-- 2.指令 -->
+    <!-- 3.事件绑定 -->
+    <!-- 4.属性绑定 -->
+    <!-- 5.样式绑定 -->
+    <!-- 两种方式:类名（class);直接操作标签的style属性 -->
+
+    <!-- 方式一：class样式处理 【也是用到v-bind】-->
+    <!--  两种写法： 
+        <div v-bind:class="{active: isActive}"></div>  对象形式 
+        <div v-bind:class="[activeClass, errorClass]"></div> 数组形式
+     -->
+
+     <!-- 样式绑定相关语法细节：
+        1.对象形式和数组形式可以结合使用
+        2.class绑定的值可以简化操作
+        3.默认的class如何处理？
+     -->
+
+    
+     <!-- 用于填充数据的标签 -->
+     <div id="app">
+        <!-- 多个类名之间逗号分隔 -->
+        <!-- 两种方式结合使用 -->
+        <div v-bind:class="[activeClass, errorClass,{test: isTest}]">{{msg}}</div>
+        <!-- 简写形式 -->
+        <div v-bind:class="arrClasses"></div>
+        <div v-bind:class="objClasses"></div>
+        <!-- 有默认class ,不会被覆盖，会保留-->
+        <div class='base' v-bind:class="objClasses"></div>
+
+
+        <button v-on:click="handle">切换</button>
+    </div>  
+
+
+    <!-- 引入vue.js库文件 -->
+    <script type="text/javascript" src="../JS/vue.min.js"></script>
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: '#app', 
+            data: {
+                msg: 'hello vue',
+                activeClass: 'active',
+                errorClass: 'error',
+                isTest: true,
+                // 简化操作版,要想修改类名，要直接操作这个数组
+                arrClasses: ['active', 'error'],
+                objClasses:{
+                    active: true,
+                    error: true,
+                }
+            },
+            methods: {
+                handle: function(event){
+                    // 去掉类名,直接更改对应的值
+                   this.isTest = !this.isTest;
+                //    移除了error类名
+                    this.arrClasses.splice(1,1);
+                //    移除了active类
+                      this.objClasses.active = false;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

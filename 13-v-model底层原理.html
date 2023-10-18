@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模板语法--v-model底层原理</title>
+    <style type="text/css">
+        [v-cloak] {
+             display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- 将数据填充到html标签中 -->
+    <!-- 概览 -->
+    <!-- 1.插值表达式  -->
+    <!-- 2.指令 -->
+    <!-- 双向数据绑定指令 -->
+    <!-- 理解：数据响应式：数据的变化导致页面 内容 的变化 -->
+    <!-- 1.v-model 只编译一次 在表单输入元素或组件上创建双向绑定。-->
+    <!-- 用法：<input type='text' v-model='uname'/>  v-model等于的值是data对象里面的属性-->
+    <!-- 底层逻辑： 通过v-bind动态绑定值，通过input事件处理值的变化-->
+
+    
+
+
+     <!-- 用于填充数据的标签 -->
+    <div id="app">
+        <div v-cloak>{{msg}}</div> 
+        <div>
+            <!-- 以下三个 实现功能是一样的 -->
+            <input type="text" v-bind:value="msg" v-on:input="handle">
+            <!-- <input type="text" v-bind:value="msg" v-on:input="msg = $event.target.value"> 简写，不用在handle -->
+            <!-- <input type="text" v-model="msg"> -->
+            
+        </div>
+    </div>  
+
+
+    <!-- 引入vue.js库文件 -->
+    <script type="text/javascript" src="../JS/vue.min.js"></script>
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: '#app', 
+            data: {
+                msg: 'hello vue',
+            },
+            methods: {
+                handle: function(event){
+                    // 使用输入域中最新的数据覆盖原来的数据
+                    this.msg = event.target.value
+                }
+            }
+        });
+    </script>
+</body>
+</html>

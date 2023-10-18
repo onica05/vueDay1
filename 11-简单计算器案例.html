@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简单计算器案例</title>
+    <style type="text/css">
+        [v-cloak] {
+             display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- 总结01-10的知识点案例 -->
+    <!-- 需求：实现简单的加法计算，分别输入数值A 数值B， 点击计算按钮，结果显示在下面 -->
+
+
+    <!-- 用于填充数据的标签 -->
+    <h1>简单计算器</h1>
+    <div id="app">
+        <div>
+            数值A
+            <input type="text" v-model="numA">
+        </div>
+        <div>
+            数值B
+            <input type="text" v-model="numB">
+        </div>
+        <div>
+            <button v-on:click="handle">计算</button>
+        </div>
+        <div v-cloak>
+            计算结果：{{sum}}
+        </div>
+
+    </div>  
+
+
+    <!-- 引入vue.js库文件 -->
+    <script type="text/javascript" src="../JS/vue.min.js"></script>
+    <script type="text/javascript">
+        
+        var vm = new Vue({
+            el: '#app', 
+            data: {
+              numA:'',
+              numB:'',
+              sum: ''
+            },
+            methods:{
+                handle:function(event){
+                    // 一定记住要加this
+                // this.sum = this.numA + this.numB; 这样只会进行字符串拼接，并不是加法运算。因为拿到的是字符串
+                this.sum = parseInt(this.numA) + parseInt(this.numB)
+                }
+                
+            }
+        });
+    </script>
+</body>
+</html>

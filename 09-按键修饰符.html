@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件绑定-按键修饰符</title>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <!-- 将数据填充到html标签中 -->
+    <!-- 概览 -->
+    <!-- 1.插值表达式  -->
+    <!-- 2.指令 -->
+    <!-- 3.事件绑定（也是指令一种，绑定具体的事件操作） -->
+     <!-- 按键修饰符， -->
+     
+
+
+    <!-- 用于填充数据的标签 -->
+    <div id="app">
+        <form action="">
+            <div>
+                用户名：
+                <input type="text" v-on:keyup.delete="clearContent" v-model="uname">
+                <!-- 通过delete键，一键清空用户名表单的内容 -->
+            </div>
+            <div>
+                密码：
+                <input type="text" v-on:keyup.enter="handleSubmint" v-model="pwd">
+                                   <!-- 通过点击回车键提交 -->
+            </div>
+            <div>
+                <input type="button" v-on:click='handleSubmint'  value="提交">
+            </div>
+        </form>
+    </div>  
+
+
+    <!-- 引入vue.js库文件 -->
+    <script type="text/javascript" src="../JS/vue.min.js"></script>
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: '#app', 
+            data: {
+               uname:'',
+               pwd:''
+            },
+            methods:{
+                handleSubmint: function(){
+                    // 一般这里接收数据通过ajax的形式传给后台
+                    console.log(this.uname);
+                    console.log(this.pwd);
+
+                },
+                clearContent: function(){
+                    // 按delete时，清空用户名
+                    this.uname = ''
+                }
+                
+            }
+        });
+    </script>
+</body>
+</html>

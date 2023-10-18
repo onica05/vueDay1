@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue的基础使用</title>
+</head>
+<body>
+    <!-- 基本使用 -->
+    <!-- 
+        1.需要提供标签用于填充数据 
+        2.引入vue.js库文件
+        3.就可以使用vue的语法做功能
+        4.把vue提供的数据填充到标签里面
+    -->
+
+    <!-- 用于填充数据的标签 -->
+    <div id="app">
+        <div>{{msg}}</div> 
+        <div>{{1 + 2}}</div> 
+        <div>{{msg + '---' + 123}}</div> 
+        {{msg}}
+        <!-- 这个DIV里面放的内容就是通过VUE放进去的 -->
+        <!-- vue的书写格式是通过 {{}} 插值表达式，来表达。用法：可以简单的计算；将数据填充到html结构中 -->
+    </div>  
+
+
+    <!-- 引入vue.js库文件 -->
+    <script type="text/javascript" src="../JS/vue.min.js"></script>
+    <script type="text/javascript">
+        var vm = new Vue({
+            // 这个el是你想要在那个 对应的id名（一定要是id名） 里面 添加内容数据；
+            // el:元素的挂在位置，元素所放到的位置，可以是css选择器或dom元素，一般用选择器
+            // data: 模型数据（值是一个对象）
+            el: '#app', 
+            data: {
+                msg: 'hello vue'
+            }
+        });
+    </script>
+
+</body>
+</html>

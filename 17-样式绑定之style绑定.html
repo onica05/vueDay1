@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模板语法--样式绑定</title>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <!-- 将数据填充到html标签中 -->
+    <!-- 概览 -->
+    <!-- 1.插值表达式  -->
+    <!-- 2.指令 -->
+    <!-- 3.事件绑定 -->
+    <!-- 4.属性绑定 -->
+    <!-- 5.样式绑定 -->
+    <!-- 两种方式:类名（class);直接操作标签的style属性 -->
+
+    <!-- 方式二：style样式处理 【也是用到v-bind】-->
+    <!--  两种写法： 
+        <div v-bind:style="{color: colorStyle, fontSize: fontSize}"></div>  对象形式 
+        <div v-bind:style="[baseStyles, overridingstyles]"></div> 数组形式
+     -->
+
+    
+     <!-- 用于填充数据的标签 -->
+     <div id="app">
+        <!-- 多个类名之间逗号分隔 -->
+        <div v-bind:style="{color: colorStyle, fontSize: fontSize, width:widthStyle, height:heightStyle, border: borderStyle}">{{msg}}</div>
+        <!-- 简化写法 -->
+        <div v-bind:style="objStyles">{{msg}}</div>
+        <!-- 数组形式，后者会覆盖前者的样式 -->
+        <div v-bind:style="[objStyles, overridingstyles]">{{msg}}</div>
+
+        <button v-on:click="handle">切换</button>
+    </div>  
+
+
+    <!-- 引入vue.js库文件 -->
+    <script type="text/javascript" src="../JS/vue.min.js"></script>
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: '#app', 
+            data: {
+                msg: 'hello vue',
+                colorStyle: 'red',
+                fontSize:'20px',
+                widthStyle:'100px',
+                heightStyle:'100px',
+                borderStyle:'1px solid red',
+                // 简化写法
+                objStyles:{
+                    border:'2px solid green',
+                    width:'200px',
+                    height:'50px',
+                },
+                overridingstyles:{
+                    // 覆盖了objstyles的border
+                    border:'6px solid pink'
+                }
+            },
+            methods: {
+                handle: function(event){
+                    this.borderStyle = '4px solid yellow';
+                    this.objStyles.height='200px'
+                
+                }
+            }
+        });
+    </script>
+</body>
+</html>

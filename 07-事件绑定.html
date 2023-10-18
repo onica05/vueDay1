@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件绑定</title>
+    <style>
+        [v-cloak]{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- 将数据填充到html标签中 -->
+    <!-- 概览 -->
+    <!-- 1.插值表达式  -->
+    <!-- 2.指令 -->
+    <!-- 3.事件绑定（也是指令一种，绑定具体的事件操作） -->
+
+    <!-- ①.v-on 给元素绑定事件监听器。-->
+    <!-- 
+        两种写法：<input type= 'button' v-on:click='num++'/>
+                 <input type= 'button'     @click='num++'/>
+     -->
+
+    <!-- 事件函数的调用方式 -->
+    <!-- 1.直接写函数名称            <button @click="handle">点击2</button>-->
+    <!-- 2.调用函数——名称+括号的形式  <button @click="handle（）">点击2</button> 
+        补充：有括号这种可以进行 参数传递
+        <button @click="handle("hi", $event)">点击2</button> 
+        $event:专门接收事件，名称是固定的
+    -->
+
+    <!-- 
+         事件绑定——参数传递
+         1.若事件直接绑定函数名称，那么默认会传递事件对象——event 作为事件函数的第一参数；
+         2.若事件绑定函数调用（有括号那种），那么事件对象必须作为最后一个参数显示传递，且名称必须是$event
+     -->
+
+    <!-- 用于填充数据的标签 -->
+    <div id="app">
+        <div v-cloak>{{num}}</div> 
+        <div>{{sum }}</div>
+        <button v-on:click="num++">点击</button>
+        <button @click="sum--">点击1</button>
+        <!-- 由于直接将要进行的操作写在这里，导致页面繁琐，以便之后操作越来越多，所以vue提供了方法——methods专门写方法函数操作 -->
+        <button @click="handle">点击2</button>
+        <button @click="handle1(123,$event)">点击3</button>
+    </div>  
+
+
+    <!-- 引入vue.js库文件 -->
+    <script type="text/javascript" src="../JS/vue.min.js"></script>
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: '#app', 
+            data: {
+                num: 0,
+                sum:10
+            },
+            methods:{
+                handle: function(){
+                    this.num++
+                    console.log(this);
+                    // 不能直接写num++,会报错，提示num is undefinded.因为作用域
+                    // 其中这个this指向 vm,  也就是Vue的实例对象
+                    // 在控制台可以直接vm.num 就可返回num的值。也就说明this === vm
+                    
+                },
+                handle1: function(parme, event){
+                    console.log(parme);
+                    console.log(event.target.tagName);
+                    console.log(event.target.innerHTML);
+                    this.sum--
+                }
+            }
+        });
+    </script>
+</body>
+</html>

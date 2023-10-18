@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模板语法--属性绑定</title>
+</head>
+<body>
+    <!-- 将数据填充到html标签中 -->
+    <!-- 概览 -->
+    <!-- 1.插值表达式  -->
+    <!-- 2.指令 -->
+    <!-- 3.事件绑定 -->
+    <!-- 4.属性绑定 -->
+    <!-- 如何动态处理属性？ -->
+    <!-- v-bind 动态的绑定一个或多个 属性（attribute），也可以是组件的 prop。 -->
+    <!-- 写法： <a v-bind:href='url'></a> 或者 <a :href='url'></a>-->
+    <!-- v-bind:使用场景可以是 这个值是无法确认的 或者 是随机会变动的 无法写死的。在大多数情况下，不是直接{{msg}}，而是v-bind:value='msg' -->
+
+    <!-- 用于填充数据的标签 -->
+    <div id="app">
+        <a v-bind:href="url">百度</a>
+        <button @click="handle">跳转</button>
+    </div>  
+
+
+    <!-- 引入vue.js库文件 -->
+    <script type="text/javascript" src="../JS/vue.min.js"></script>
+    <script type="text/javascript">
+        
+        var vm = new Vue({
+            el: '#app', 
+            data: {
+              url:'http://www.baidu.com'
+            },
+            methods:{
+                handle:function(event){
+                    alert('跳转地址已改变')
+                    this.url = 'http://cn.vuejs.org'
+                    
+                }
+                
+            }
+        });
+    </script>
+</body>
+</html>
